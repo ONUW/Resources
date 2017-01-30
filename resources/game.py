@@ -2,7 +2,7 @@ import pygame, sys, socket, threading, time
 from pygame.locals import *
 
 pygame.init()
-size = width, height = 1280,720
+size = width, height = 1280, 720
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption('One Night Ultimate Werewolf')
@@ -20,13 +20,32 @@ testfont = pygame.font.Font("resources/fonts/NIXGONFONTS M 2.0.ttf", 20)
 
 while True:
     screen.fill(color["background_color"])
-    pygame.draw.rect(screen, color["white"], (50, 60, 200, 300))
 
-    # 글씨 1
+    # 내 카드
+    pygame.draw.rect(screen, color["white"], (50, 60, 200, 300)) # 나중에 이미지로 바꾸어야 됨
+    # 내 카드 글씨
     mycardtext = testfont.render("내 카드", True, color["black"])
     mycardtextobj = mycardtext.get_rect()
     mycardtextobj.center = (150, 30)
     screen.blit(mycardtext, mycardtextobj)
+
+    # 채팅창
+    pygame.draw.rect(screen, color["white"], (50, 420, 200, 250))
+
+    # 설명판
+    pygame.draw.rect(screen, color["white"], (335, 420, 630, 250))
+
+    # 순서표
+    pygame.draw.rect(screen, color["white"], (1040, 420, 200, 250))
+
+    # 카드 3장 # 나중에 이미지로 바꿔야 됨
+    for i in range(3):
+        pygame.draw.rect(screen, color["white"], (50+200+75+90*i, 60+105, 60, 90))
+
+    # 플레이어 카드
+    for i in range(5):
+        for j in range(2):
+            pygame.draw.rect(screen, color["white"], (50+200+390+120*i, 60+5+170*j, 80, 120))
 
     pygame.display.flip()
 
@@ -43,6 +62,5 @@ while True:
         if event.type == KEYDOWN:
             pass
         if event.type == QUIT:
-            pyame.quit()
+            pygame.quit()
             sys.exit()
-
