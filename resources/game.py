@@ -12,91 +12,86 @@ numberofplayer = 5
 pygame.display.set_caption('One Night Ultimate Werewolf')
 
 # 색깔
-color = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0), "green": (0, 255, 0), "blue": (0, 0, 255),
+Color = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0), "green": (0, 255, 0), "blue": (0, 0, 255),
          "magenta": (255, 0, 255), "orange": (255, 127, 0), "pink": (255, 192, 203),
-         "background_color": (255, 244, 78), "brown": (150, 75, 0), "cyan": (0, 255, 255), "indigo": (75, 0, 130),
+         "backgroundColor": (255, 244, 78), "brown": (150, 75, 0), "cyan": (0, 255, 255), "indigo": (75, 0, 130),
          "purple": (128, 0, 128), "violet": (143, 0, 255), "gray": (128, 128, 128)}
 
 # 폰트
-mycardfont = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 20)
-mycardfontbig = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 40)
+myCardFont = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 20)
+myCardFontbig = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 40)
 
 # 사진
-doppelganger = pygame.image.load("./images/doppelganger.png")
-drunk = pygame.image.load("./images/drunk.png")
-hunter = pygame.image.load("./images/hunter.png")
-insomniac = pygame.image.load("./images/insomniac.png")
-mason = pygame.image.load("./images/mason.png")
-minion = pygame.image.load("./images/minion.png")
-robber = pygame.image.load("./images/robber.png")
-seer = pygame.image.load("./images/seer.png")
-tanner = pygame.image.load("./images/tanner.png")
-troublemaker = pygame.image.load("./images/troublemaker.png")
-villager = pygame.image.load("./images/villager.png")
-werewolf = pygame.image.load("./images/werewolf.png")
+Doppelganger = pygame.image.load("./images/doppelganger.png")
+Drunk = pygame.image.load("./images/drunk.png")
+Hunter = pygame.image.load("./images/hunter.png")
+Insomniac = pygame.image.load("./images/insomniac.png")
+Mason = pygame.image.load("./images/mason.png")
+Minion = pygame.image.load("./images/minion.png")
+Robber = pygame.image.load("./images/robber.png")
+Seer = pygame.image.load("./images/seer.png")
+Tanner = pygame.image.load("./images/tanner.png")
+Troublemaker = pygame.image.load("./images/troublemaker.png")
+Villager = pygame.image.load("./images/villager.png")
+Werewolf = pygame.image.load("./images/werewolf.png")
 
 # 음악
 
 
 # 캐릭터 배열
-character = [doppelganger, drunk, hunter, insomniac, mason, minion, robber, seer, tanner, troublemaker, villager,
-             werewolf]
-mycharacter = random.randrange(0, 12)
+Character = [Doppelganger, Drunk, Hunter, Insomniac, Mason, Minion, Robber, Seer, Tanner, Troublemaker, Villager, Werewolf]
+myCharacter = random.randrange(0, 12)
 
 while True:
-    screen.fill(color["background_color"])
+    screen.fill(Color["backgroundColor"])
     if stage == 1:
         if sakistage != stage:
             sakistage = stage
 
-        pygame.draw.rect(screen, color["purple"], [width // 2 + 150, height // 2 - 27, 96, 54])
+        pygame.draw.rect(screen, Color["purple"], [width // 2 + 150, height // 2 - 27, 96, 54])
 
-        txt1 = mycardfontbig.render("몇 명?: " + str(numberofplayer) + " 명", True, color["black"])
-        txtobj1 = txt1.get_rect()
-        txtobj1.center = (width // 2, height // 2)
-        screen.blit(txt1, txtobj1)
+        txt1 = myCardFontbig.render("몇 명?: " + str(numberofplayer) + " 명", True, Color["black"])
+        txtObj1 = txt1.get_rect()
+        txtObj1.center = (width // 2, height // 2)
+        screen.blit(txt1, txtObj1)
 
-        txt2 = mycardfontbig.render("확 인", True, color["white"])
-        txtobj2 = txt2.get_rect()
-        txtobj2.center = (width // 2 + 198, height // 2)
-        screen.blit(txt2, txtobj2)
+        txt2 = myCardFontbig.render("확 인", True, Color["white"])
+        txtObj2 = txt2.get_rect()
+        txtObj2.center = (width // 2 + 198, height // 2)
+        screen.blit(txt2, txtObj2)
 
-        pygame.draw.polygon(screen, color["purple"],
-                            [[width // 2, height // 2 - 60], [width // 2 - 30, height // 2 - 30],
-                             [width // 2 + 30, height // 2 - 30]])
-        pygame.draw.polygon(screen, color["purple"],
-                            [[width // 2, height // 2 + 60], [width // 2 - 30, height // 2 + 30],
-                             [width // 2 + 30, height // 2 + 30]])
+        pygame.draw.polygon(screen, Color["purple"], [[width // 2, height // 2 - 60], [width // 2 - 30, height // 2 - 30], [width // 2 + 30, height // 2 - 30]])
+        pygame.draw.polygon(screen, Color["purple"], [[width // 2, height // 2 + 60], [width // 2 - 30, height // 2 + 30], [width // 2 + 30, height // 2 + 30]])
 
     elif stage == 2:
         if sakistage != stage:
             sakistage = stage
         # 내 카드
-        # pygame.draw.rect(screen, color["white"], (50, 60, 200, 300)) # 나중에 이미지로 바꾸어야 됨
-        screen.blit(character[mycharacter], (50, 60))
+        # pygame.draw.rect(screen, Color["white"], (50, 60, 200, 300)) # 나중에 이미지로 바꾸어야 됨
+        screen.blit(Character[myCharacter], (50, 60))
         # 내 카드 글씨
-        mycardtext = mycardfont.render("내 카드", True, color["black"])
-        mycardtextobj = mycardtext.get_rect()
-        mycardtextobj.center = (150, 30)
-        screen.blit(mycardtext, mycardtextobj)
+        myCardText = myCardFont.render("내 카드", True, Color["black"])
+        myCardTextObj = myCardText.get_rect()
+        myCardTextObj.center = (150, 30)
+        screen.blit(myCardText, myCardTextObj)
 
         # 채팅창
-        pygame.draw.rect(screen, color["white"], (50, 420, 200, 250))
+        pygame.draw.rect(screen, Color["white"], (50, 420, 200, 250))
 
         # 설명판
-        pygame.draw.rect(screen, color["white"], (335, 420, 630, 250))
+        pygame.draw.rect(screen, Color["white"], (335, 420, 630, 250))
 
         # 순서표
-        pygame.draw.rect(screen, color["white"], (1040, 420, 200, 250))
+        pygame.draw.rect(screen, Color["white"], (1040, 420, 200, 250))
 
         # 카드 3장 # 나중에 이미지로 바꿔야 됨
         for i in range(3):
-            pygame.draw.rect(screen, color["white"], (50 + 200 + 75 + 90 * i, 60 + 105, 60, 90))
+            pygame.draw.rect(screen, Color["white"], (50 + 200 + 75 + 90 * i, 60 + 105, 60, 90))
 
         # 플레이어 카드
         for i in range(5):
             for j in range(2):
-                pygame.draw.rect(screen, color["white"], (50 + 200 + 390 + 120 * i, 60 + 5 + 170 * j, 80, 120))
+                pygame.draw.rect(screen, Color["white"], (50 + 200 + 390 + 120 * i, 60 + 5 + 170 * j, 80, 120))
 
     pygame.display.flip()
 
