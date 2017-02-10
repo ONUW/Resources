@@ -20,22 +20,22 @@ def main():
          "purple": (128, 0, 128), "violet": (143, 0, 255), "gray": (128, 128, 128)}
 
     # 폰트
-    myCardFont = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 20)
-    myCardFontbig = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 40)
+    myCardFont = pygame.font.Font("NIXGONFONTS M 2.0.ttf", 20)
+    myCardFontbig = pygame.font.Font("NIXGONFONTS M 2.0.ttf", 40)
 
     # 사진
-    Doppelganger = pygame.image.load("./images/doppelganger.png")
-    Drunk = pygame.image.load("./images/drunk.png")
-    Hunter = pygame.image.load("./images/hunter.png")
-    Insomniac = pygame.image.load("./images/insomniac.png")
-    Mason = pygame.image.load("./images/mason.png")
-    Minion = pygame.image.load("./images/minion.png")
-    Robber = pygame.image.load("./images/robber.png")
-    Seer = pygame.image.load("./images/seer.png")
-    Tanner = pygame.image.load("./images/tanner.png")
-    Troublemaker = pygame.image.load("./images/troublemaker.png")
-    Villager = pygame.image.load("./images/villager.png")
-    Werewolf = pygame.image.load("./images/werewolf.png")
+    Doppelganger = pygame.image.load("doppelganger.png")
+    Drunk = pygame.image.load("drunk.png")
+    Hunter = pygame.image.load("hunter.png")
+    Insomniac = pygame.image.load("insomniac.png")
+    Mason = pygame.image.load("mason.png")
+    Minion = pygame.image.load("minion.png")
+    Robber = pygame.image.load("robber.png")
+    Seer = pygame.image.load("seer.png")
+    Tanner = pygame.image.load("tanner.png")
+    Troublemaker = pygame.image.load("troublemaker.png")
+    Villager = pygame.image.load("villager.png")
+    Werewolf = pygame.image.load("werewolf.png")
 
     # 음악
 
@@ -50,27 +50,27 @@ def main():
             if sakiStage != stage:
                 sakiStage = stage
 
-            pygame.draw.rect(screen, Color["purple"], [width // 2 + 150, height // 2 - 27, 96, 54])
+            pygame.draw.rect(screen, Color["purple"], [width // 2 + 100, height // 2 - 37, 96, 54])
 
             txt1 = myCardFontbig.render("몇 명?: " + str(numberOfPlayer) + " 명", True, Color["black"])
             txtObj1 = txt1.get_rect()
-            txtObj1.center = (width // 2, height // 2)
+            txtObj1.center = (width // 2 - 50, height // 2 - 10)
             screen.blit(txt1, txtObj1)
 
             txt2 = myCardFontbig.render("확 인", True, Color["white"])
             txtObj2 = txt2.get_rect()
-            txtObj2.center = (width // 2 + 198, height // 2)
+            txtObj2.center = (width // 2 + 148, height // 2 - 10)
             screen.blit(txt2, txtObj2)
 
-            pygame.draw.polygon(screen, Color["purple"], [[width // 2, height // 2 - 60], [width // 2 - 30, height // 2 - 30], [width // 2 + 30, height // 2 - 30]])
-            pygame.draw.polygon(screen, Color["purple"], [[width // 2, height // 2 + 60], [width // 2 - 30, height // 2 + 30], [width // 2 + 30, height // 2 + 30]])
+            pygame.draw.polygon(screen, Color["purple"], [[width // 2 - 50, height // 2 - 70], [width // 2 - 80, height // 2 - 40], [width // 2 - 20, height // 2 - 40]])
+            pygame.draw.polygon(screen, Color["purple"], [[width // 2 - 50, height // 2 + 50], [width // 2 - 80, height // 2 + 20], [width // 2 - 20, height // 2 + 20]])
 
         elif stage == 2:
             if sakiStage != stage:
                 sakiStage = stage
             for i in range(4):
                 for j in range(4):
-                    pygame.draw.rect(screen, Color["white"], (width // 2 - 200 + 90 * i, height // 2 - 300 + 130 * j, 80, 120))
+                    pygame.draw.rect(screen, Color["white"], (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j, 80, 120))
                     tmp = 4*i + j + 1
                     img = 0
                     if tmp <= 3:
@@ -97,7 +97,7 @@ def main():
                         img = Character[10]
                     elif tmp == 16:
                         img = Character[11]
-                    screen.blit(pygame.transform.scale(img, (80, 120)), (width // 2 - 200 + 90 * i, height // 2 - 300 + 130 * j))
+                    screen.blit(pygame.transform.scale(img, (80, 120)), (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j))
 
         elif stage == 3:
             if sakiStage != stage:
@@ -137,13 +137,13 @@ def main():
             if event.type == MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 if stage == 1:
-                    if abs(pos[0] - width // 2) <= 30 and abs(pos[1] - height // 2 + 30) <= 30:
+                    if abs(pos[0] - (width // 2 - 50)) <= 30 and abs(pos[1] - (height // 2 - 55)) <= 15:
                         if numberOfPlayer < 10:
                             numberOfPlayer += 1
-                    if abs(pos[0] - width // 2) <= 30 and abs(pos[1] - height // 2 - 30) <= 30:
+                    if abs(pos[0] - (width // 2 - 50)) <= 30 and abs(pos[1] - (height // 2 + 35)) <= 15:
                         if numberOfPlayer > 3:
                             numberOfPlayer -= 1
-                    if abs(pos[0] - width // 2 - 198) <= 48 and abs(pos[1] - height // 2) <= 27:
+                    if abs(pos[0] - (width // 2 + 148)) <= 48 and abs(pos[1] - (height // 2 - 10)) <= 27:
                         stage = 2
             if event.type == MOUSEMOTION:
                 pos = pygame.mouse.get_pos()
