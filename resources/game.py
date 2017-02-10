@@ -41,7 +41,7 @@ def main():
 
 
     # 캐릭터 배열
-    Character = [Doppelganger, Drunk, Hunter, Insomniac, Mason, Minion, Robber, Seer, Tanner, Troublemaker, Villager, Werewolf]
+    Character = [Villager, Werewolf, Seer, Robber, Troublemaker, Tanner, Drunk, Hunter, Mason, Insomniac, Minion, Doppelganger]
     myCharacter = random.randrange(0, len(Character))
 
     while True:
@@ -71,7 +71,33 @@ def main():
             for i in range(4):
                 for j in range(4):
                     pygame.draw.rect(screen, Color["white"], (width // 2 - 200 + 90 * i, height // 2 - 300 + 130 * j, 80, 120))
-
+                    tmp = 4*i + j + 1
+                    img = 0
+                    if tmp <= 3:
+                        img = Character[0]
+                    elif tmp <= 5:
+                        img = Character[1]
+                    elif tmp == 6:
+                        img = Character[2]
+                    elif tmp == 7:
+                        img = Character[3]
+                    elif tmp == 8:
+                        img = Character[4]
+                    elif tmp == 9:
+                        img = Character[5]
+                    elif tmp == 10:
+                        img = Character[6]
+                    elif tmp == 11:
+                        img = Character[7]
+                    elif tmp <= 13:
+                        img = Character[8]
+                    elif tmp == 14:
+                        img = Character[9]
+                    elif tmp == 15:
+                        img = Character[10]
+                    elif tmp == 16:
+                        img = Character[11]
+                    screen.blit(pygame.transform.scale(img, (80, 120)), (width // 2 - 200 + 90 * i, height // 2 - 300 + 130 * j))
 
         elif stage == 3:
             if sakiStage != stage:
