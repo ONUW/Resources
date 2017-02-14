@@ -86,7 +86,7 @@ def main():
                 sakiStage = stage
             for i in range(4):
                 for j in range(4):
-                    pygame.draw.rect(screen, Color["white"], (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j, 80, 120))
+                    pygame.draw.rect(screen, Color["white"], (width//2 - 200 + 90*i, height//2 - 270 + 130*j, 80, 120))
                     tmp = i + 4*j + 1
                     img = 0
                     if tmp == 1:
@@ -113,7 +113,7 @@ def main():
                         img = chooseHunter
                     elif tmp == 16:
                         img = chooseTanner
-                    screen.blit(img, (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j))
+                    screen.blit(img, (width//2 - 200 + 90*i, height//2 - 270 + 130*j))
 
         elif stage == 3:
             if sakiStage != stage:
@@ -138,12 +138,12 @@ def main():
 
             # 카드 3장 # 나중에 이미지로 바꿔야 됨
             for i in range(3):
-                pygame.draw.rect(screen, Color["white"], (50 + 200 + 75 + 90 * i, 60 + 105, 60, 90))
+                pygame.draw.rect(screen, Color["white"], (50 + 200 + 75 + 90*i, 60 + 105, 60, 90))
 
             # 플레이어 카드
             for i in range(5):
                 for j in range(2):
-                    pygame.draw.rect(screen, Color["white"], (50 + 200 + 390 + 120 * i, 60 + 5 + 170 * j, 80, 120))
+                    pygame.draw.rect(screen, Color["white"], (50 + 200 + 390 + 120*i, 60 + 5 + 170*j, 80, 120))
 
         pygame.display.flip()
 
@@ -153,13 +153,13 @@ def main():
             if event.type == MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 if stage == 1:
-                    if abs(pos[0] - (width // 2 - 50)) <= 30 and abs(pos[1] - (height // 2 - 55)) <= 15:
+                    if abs(pos[0] - (width//2 - 50)) <= 30 and abs(pos[1] - (height//2 - 55)) <= 15:
                         if numberOfPlayer < 10:
                             numberOfPlayer += 1
-                    if abs(pos[0] - (width // 2 - 50)) <= 30 and abs(pos[1] - (height // 2 + 35)) <= 15:
+                    if abs(pos[0] - (width//2 - 50)) <= 30 and abs(pos[1] - (height//2 + 35)) <= 15:
                         if numberOfPlayer > 3:
                             numberOfPlayer -= 1
-                    if abs(pos[0] - (width // 2 + 148)) <= 48 and abs(pos[1] - (height // 2 - 10)) <= 27:
+                    if abs(pos[0] - (width//2 + 148)) <= 48 and abs(pos[1] - (height//2 - 10)) <= 27:
                         stage = 2
             if event.type == MOUSEMOTION:
                 pos = pygame.mouse.get_pos()
