@@ -37,6 +37,19 @@ def main():
     Villager = pygame.image.load("villager.png")
     Werewolf = pygame.image.load("werewolf.png")
 
+    choose_Doppelganger = pygame.image.load("doppelganger80.png")
+    choose_Drunk = pygame.image.load("drunk80.png")
+    choose_Hunter = pygame.image.load("hunter80.png")
+    choose_Insomniac = pygame.image.load("insomniac80.png")
+    choose_Mason = pygame.image.load("mason80.png")
+    choose_Minion = pygame.image.load("minion80.png")
+    choose_Robber = pygame.image.load("robber80.png")
+    choose_Seer = pygame.image.load("seer80.png")
+    choose_Tanner = pygame.image.load("tanner80.png")
+    choose_Troublemaker = pygame.image.load("troublemaker80.png")
+    choose_Villager = pygame.image.load("villager80.png")
+    choose_Werewolf = pygame.image.load("werewolf80.png")
+
     # 음악
 
 
@@ -65,39 +78,40 @@ def main():
             pygame.draw.polygon(screen, Color["purple"], [[width // 2 - 50, height // 2 - 70], [width // 2 - 80, height // 2 - 40], [width // 2 - 20, height // 2 - 40]])
             pygame.draw.polygon(screen, Color["purple"], [[width // 2 - 50, height // 2 + 50], [width // 2 - 80, height // 2 + 20], [width // 2 - 20, height // 2 + 20]])
 
+        # 잠에서 깨어나는 순서로 넣을게 (One Night 앱 참조)
         elif stage == 2:
             if sakiStage != stage:
                 sakiStage = stage
             for i in range(4):
                 for j in range(4):
                     pygame.draw.rect(screen, Color["white"], (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j, 80, 120))
-                    tmp = 4*i + j + 1
+                    tmp = i + 4*j + 1
                     img = 0
-                    if tmp <= 3:
-                        img = Character[0]
-                    elif tmp <= 5:
-                        img = Character[1]
-                    elif tmp == 6:
-                        img = Character[2]
+                    if tmp == 1:
+                        img = choose_Doppelganger
+                    elif tmp <= 3:
+                        img = choose_Werewolf
+                    elif tmp == 4:
+                        img = choose_Minion
+                    elif tmp <= 6:
+                        img = choose_Mason
                     elif tmp == 7:
-                        img = Character[3]
+                        img = choose_Seer
                     elif tmp == 8:
-                        img = Character[4]
+                        img = choose_Robber
                     elif tmp == 9:
-                        img = Character[5]
+                        img = choose_Troublemaker
                     elif tmp == 10:
-                        img = Character[6]
+                        img = choose_Drunk
                     elif tmp == 11:
-                        img = Character[7]
-                    elif tmp <= 13:
-                        img = Character[8]
-                    elif tmp == 14:
-                        img = Character[9]
+                        img = choose_Insomniac
+                    elif tmp <= 14:
+                        img = choose_Villager
                     elif tmp == 15:
-                        img = Character[10]
+                        img = choose_Hunter
                     elif tmp == 16:
-                        img = Character[11]
-                    screen.blit(pygame.transform.scale(img, (80, 120)), (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j))
+                        img = choose_Tanner
+                    screen.blit(img, (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j))
 
         elif stage == 3:
             if sakiStage != stage:
