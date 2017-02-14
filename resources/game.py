@@ -20,41 +20,43 @@ def main():
          "purple": (128, 0, 128), "violet": (143, 0, 255), "gray": (128, 128, 128)}
 
     # 폰트
-    myCardFont = pygame.font.Font("NIXGONFONTS M 2.0.ttf", 20)
-    myCardFontbig = pygame.font.Font("NIXGONFONTS M 2.0.ttf", 40)
+    myCardFont = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 20)
+    myCardFontbig = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 40)
 
     # 사진
-    Doppelganger = pygame.image.load("doppelganger.png")
-    Drunk = pygame.image.load("drunk.png")
-    Hunter = pygame.image.load("hunter.png")
-    Insomniac = pygame.image.load("insomniac.png")
-    Mason = pygame.image.load("mason.png")
-    Minion = pygame.image.load("minion.png")
-    Robber = pygame.image.load("robber.png")
-    Seer = pygame.image.load("seer.png")
-    Tanner = pygame.image.load("tanner.png")
-    Troublemaker = pygame.image.load("troublemaker.png")
-    Villager = pygame.image.load("villager.png")
-    Werewolf = pygame.image.load("werewolf.png")
+    Doppelganger = pygame.image.load("./images/doppelganger.png")
+    Drunk = pygame.image.load("./images/drunk.png")
+    Hunter = pygame.image.load("./images/hunter.png")
+    Insomniac = pygame.image.load("./images/insomniac.png")
+    Mason = pygame.image.load("./images/mason.png")
+    Minion = pygame.image.load("./images/minion.png")
+    Robber = pygame.image.load("./images/robber.png")
+    Seer = pygame.image.load("./images/seer.png")
+    Tanner = pygame.image.load("./images/tanner.png")
+    Troublemaker = pygame.image.load("./images/troublemaker.png")
+    Villager = pygame.image.load("./images/villager.png")
+    Werewolf = pygame.image.load("./images/werewolf.png")
 
-    choose_Doppelganger = pygame.image.load("doppelganger80.png")
-    choose_Drunk = pygame.image.load("drunk80.png")
-    choose_Hunter = pygame.image.load("hunter80.png")
-    choose_Insomniac = pygame.image.load("insomniac80.png")
-    choose_Mason = pygame.image.load("mason80.png")
-    choose_Minion = pygame.image.load("minion80.png")
-    choose_Robber = pygame.image.load("robber80.png")
-    choose_Seer = pygame.image.load("seer80.png")
-    choose_Tanner = pygame.image.load("tanner80.png")
-    choose_Troublemaker = pygame.image.load("troublemaker80.png")
-    choose_Villager = pygame.image.load("villager80.png")
-    choose_Werewolf = pygame.image.load("werewolf80.png")
+    chooseDoppelganger = pygame.image.load("./images/choose/doppelganger80.png")
+    chooseDrunk = pygame.image.load("./images/choose/drunk80.png")
+    chooseHunter = pygame.image.load("./images/choose/hunter80.png")
+    chooseInsomniac = pygame.image.load("./images/choose/insomniac80.png")
+    chooseMason = pygame.image.load("./images/choose/mason80.png")
+    chooseMinion = pygame.image.load("./images/choose/minion80.png")
+    chooseRobber = pygame.image.load("./images/choose/robber80.png")
+    chooseSeer = pygame.image.load("./images/choose/seer80.png")
+    chooseTanner = pygame.image.load("./images/choose/tanner80.png")
+    chooseTroublemaker = pygame.image.load("./images/choose/troublemaker80.png")
+    chooseVillager = pygame.image.load("./images/choose/villager80.png")
+    chooseWerewolf = pygame.image.load("./images/choose/werewolf80.png")
 
     # 음악
 
 
     # 캐릭터 배열
     Character = [Villager, Werewolf, Seer, Robber, Troublemaker, Tanner, Drunk, Hunter, Mason, Insomniac, Minion, Doppelganger]
+    chooseCharacter = [chooseVillager, chooseWerewolf, chooseSeer, chooseRobber, chooseTroublemaker, chooseTanner, chooseTanner, 
+            chooseDrunk, chooseHunter, chooseMason, chooseInsomniac, chooseMinion, chooseDoppelganger]
     myCharacter = random.randrange(0, len(Character))
 
     while True:
@@ -67,16 +69,16 @@ def main():
 
             txt1 = myCardFontbig.render("몇 명?: " + str(numberOfPlayer) + " 명", True, Color["black"])
             txtObj1 = txt1.get_rect()
-            txtObj1.center = (width // 2 - 50, height // 2 - 10)
+            txtObj1.center = (width//2 - 50, height//2 - 10)
             screen.blit(txt1, txtObj1)
 
             txt2 = myCardFontbig.render("확 인", True, Color["white"])
             txtObj2 = txt2.get_rect()
-            txtObj2.center = (width // 2 + 148, height // 2 - 10)
+            txtObj2.center = (width//2 + 148, height//2 - 10)
             screen.blit(txt2, txtObj2)
 
-            pygame.draw.polygon(screen, Color["purple"], [[width // 2 - 50, height // 2 - 70], [width // 2 - 80, height // 2 - 40], [width // 2 - 20, height // 2 - 40]])
-            pygame.draw.polygon(screen, Color["purple"], [[width // 2 - 50, height // 2 + 50], [width // 2 - 80, height // 2 + 20], [width // 2 - 20, height // 2 + 20]])
+            pygame.draw.polygon(screen, Color["purple"], [[width//2 - 50, height//2 - 70], [width//2 - 80, height//2 - 40], [width//2 - 20, height//2 - 40]])
+            pygame.draw.polygon(screen, Color["purple"], [[width//2 - 50, height//2 + 50], [width//2 - 80, height//2 + 20], [width//2 - 20, height//2 + 20]])
 
         # 잠에서 깨어나는 순서로 넣을게 (One Night 앱 참조)
         elif stage == 2:
@@ -88,29 +90,29 @@ def main():
                     tmp = i + 4*j + 1
                     img = 0
                     if tmp == 1:
-                        img = choose_Doppelganger
+                        img = chooseDoppelganger
                     elif tmp <= 3:
-                        img = choose_Werewolf
+                        img = chooseWerewolf
                     elif tmp == 4:
-                        img = choose_Minion
+                        img = chooseMinion
                     elif tmp <= 6:
-                        img = choose_Mason
+                        img = chooseMason
                     elif tmp == 7:
-                        img = choose_Seer
+                        img = chooseSeer
                     elif tmp == 8:
-                        img = choose_Robber
+                        img = chooseRobber
                     elif tmp == 9:
-                        img = choose_Troublemaker
+                        img = chooseTroublemaker
                     elif tmp == 10:
-                        img = choose_Drunk
+                        img = chooseDrunk
                     elif tmp == 11:
-                        img = choose_Insomniac
+                        img = chooseInsomniac
                     elif tmp <= 14:
-                        img = choose_Villager
+                        img = chooseVillager
                     elif tmp == 15:
-                        img = choose_Hunter
+                        img = chooseHunter
                     elif tmp == 16:
-                        img = choose_Tanner
+                        img = chooseTanner
                     screen.blit(img, (width // 2 - 200 + 90 * i, height // 2 - 270 + 130 * j))
 
         elif stage == 3:
