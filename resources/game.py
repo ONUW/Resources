@@ -10,6 +10,10 @@ def main():
     stage = 1
     numberOfPlayer = 5
     whoPlayNow = 0
+    posClick = (0, 0)
+    posMotion = (0, 0)
+    isClick = False
+    tmp = 0
 
     pygame.display.set_caption('One Night Ultimate Werewolf')
 
@@ -57,6 +61,7 @@ def main():
     Character = [Villager, Werewolf, Seer, Robber, Troublemaker, Tanner, Drunk, Hunter, Mason, Insomniac, Minion, Doppelganger]
     chooseCharacter = [chooseVillager, chooseWerewolf, chooseSeer, chooseRobber, chooseTroublemaker, chooseTanner, chooseTanner, 
             chooseDrunk, chooseHunter, chooseMason, chooseInsomniac, chooseMinion, chooseDoppelganger]
+    PlayerList = list()
     myCharacter = random.randrange(0, len(Character))
 
     while True:
@@ -84,36 +89,61 @@ def main():
         elif stage == 2:
             if sakiStage != stage:
                 sakiStage = stage
+                isClick = False 
             for i in range(4):
                 for j in range(4):
-                    pygame.draw.rect(screen, Color["white"], (width//2 - 200 + 90*i, height//2 - 270 + 130*j, 80, 120))
+                    x, y = width//2 - 200 + 90*i, height//2 - 270 + 130*j
+                    pygame.draw.rect(screen, Color["white"], (x, y, 80, 120))
                     tmp = i + 4*j + 1
                     img = 0
                     if tmp == 1:
                         img = chooseDoppelganger
+                        img2 = Doppelganger
                     elif tmp <= 3:
                         img = chooseWerewolf
+                        img2 = Werewolf
                     elif tmp == 4:
                         img = chooseMinion
+                        img2 = Minion
                     elif tmp <= 6:
                         img = chooseMason
+                        img2 = Mason
                     elif tmp == 7:
                         img = chooseSeer
+                        img2 = Seer
                     elif tmp == 8:
                         img = chooseRobber
+                        img2 = Robber
                     elif tmp == 9:
                         img = chooseTroublemaker
+                        img2 = Troublemaker
                     elif tmp == 10:
                         img = chooseDrunk
+                        img2 = Drunk
                     elif tmp == 11:
                         img = chooseInsomniac
+                        img2 = Insomniac
                     elif tmp <= 14:
                         img = chooseVillager
+                        img2 = Villager
                     elif tmp == 15:
                         img = chooseHunter
+                        img2 = Hunter
                     elif tmp == 16:
                         img = chooseTanner
-                    screen.blit(img, (width//2 - 200 + 90*i, height//2 - 270 + 130*j))
+                        img2 = Tanner
+                    if isClick == True:
+                        if abs(posClick[0] - (x+40)) <= 40 and abs(posClick[1] - (y+60)) <= 60:
+                            isClick = False
+                            if tmp in PlayerList:
+                                PlayerList.remove(tmp)
+                            else:
+                                PlayerList.append(tmp)
+                    if tmp in PlayerList:
+                        pygame.draw.rect(screen, Color["blue"], [x - 4, y - 4, 80 + 2*4, 120 + 2*4])
+                    screen.blit(img, (x,y))
+                    if abs(posMotion[0] - (x+40)) <= 40 and abs(posMotion[1] - (y+60)) <= 60:
+                        screen.blit(pygame.transform.scale(img2, (160, 240)), (width//2 + 200, height//2 - 120))
 
         elif stage == 3:
             if sakiStage != stage:
@@ -149,20 +179,19 @@ def main():
 
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
-            if event.type == MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
+                posClick = pygame.mouse.get_pos()
+                isClick = True
                 if stage == 1:
-                    if abs(pos[0] - (width//2 - 50)) <= 30 and abs(pos[1] - (height//2 - 55)) <= 15:
+                    if abs(posClick[0] - (width//2 - 50)) <= 30 and abs(posClick[1] - (height//2 - 55)) <= 15:
                         if numberOfPlayer < 10:
                             numberOfPlayer += 1
-                    if abs(pos[0] - (width//2 - 50)) <= 30 and abs(pos[1] - (height//2 + 35)) <= 15:
+                    if abs(posClick[0] - (width//2 - 50)) <= 30 and abs(posClick[1] - (height//2 + 35)) <= 15:
                         if numberOfPlayer > 3:
                             numberOfPlayer -= 1
-                    if abs(pos[0] - (width//2 + 148)) <= 48 and abs(pos[1] - (height//2 - 10)) <= 27:
+                    if abs(posClick[0] - (width//2 + 148)) <= 48 and abs(posClick[1] - (height//2 - 10)) <= 27:
                         stage = 2
             if event.type == MOUSEMOTION:
-                pos = pygame.mouse.get_pos()
+                posMotion = pygame.mouse.get_pos()
             if event.type == KEYDOWN:
                 pass
             if event.type == QUIT:
