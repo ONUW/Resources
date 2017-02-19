@@ -4,7 +4,7 @@ from pygame.locals import *
 def main():
     pygame.init()
     size = width, height = 1280, 720
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode(size, pygame.DOUBLEBUF)
 
     sakiStage = 0
     stage = 1
@@ -16,8 +16,11 @@ def main():
     isClick = False
     tmp = 0
     path = "resources"
+    FPS = 30 
+    msg = ""
 
     pygame.display.set_caption('One Night Ultimate Werewolf')
+    clock = pygame.time.Clock()
 
     # 색깔
     Color = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0), "green": (0, 255, 0), "blue": (0, 0, 255),
@@ -94,14 +97,24 @@ def main():
 
         # 잠에서 깨어나는 순서로 넣을게 (One Night 앱 참조)
         elif stage == 2:
-            if(numberOfChoose == numberOfPlayer + 3):
-                pygame.draw.rect(screen, Color["purple"], [width // 2 + 450, height // 2 - 37, 96, 54])
-            else:
-                pygame.draw.rect(screen, Color["lightpurple"], [width // 2 + 450, height // 2 - 37, 96, 54])
+            if numberOfChoose == numberOfPlayer + 3:
+                pygame.draw.rect(screen, Color["green"], [width//2 + 450, height // 2 - 37, 96, 54])
+            elif numberOfChoose < numberOfPlayer + 3:
+                pygame.draw.rect(screen, Color["blue"], [width//2 + 450, height // 2 - 37, 96, 54])
+            elif numberOfChoose > numberOfPlayer + 3:
+                pygame.draw.rect(screen, Color["red"], [width // 2 + 450, height // 2 - 37, 96, 54])
             compTxt = myCardFontbig.render("완 료", True, Color["white"]) # 완료 버튼 만들기
             txtObj2 = compTxt.get_rect()
             txtObj2.center = (width // 2 + 498, height // 2 - 10)
             screen.blit(compTxt, txtObj2)
+
+            try:
+                errTxt = myCardFont.render(msg, True, Color["black"])
+            except:
+                errTxt = myCardFont.render("", True, Color["black"])
+            txtObj3 = errTxt.get_rect()
+            txtObj3.center = (width*4//5, height*3//4)
+            screen.blit(errTxt, txtObj3)
 
             if sakiStage != stage:
                 sakiStage = stage
@@ -153,10 +166,9 @@ def main():
                             isClick = False
                             if tmp in PlayerList:
                                 PlayerList.remove(tmp)
-                                numberOfChoose = numberOfChoose - 1
-                            elif numberOfChoose < numberOfPlayer + 3:
+                            else:
                                 PlayerList.append(tmp)
-                                numberOfChoose = numberOfChoose + 1
+                        numberOfChoose = len(PlayerList)
                     if tmp in PlayerList:
                         pygame.draw.rect(screen, Color["blue"], [x - 4, y - 4, 80 + 2*4, 120 + 2*4])
                     screen.blit(img, (x,y))
@@ -208,6 +220,18 @@ def main():
                             numberOfPlayer -= 1
                     if abs(posClick[0] - (width//2 + 148)) <= 48 and abs(posClick[1] - (height//2 - 10)) <= 27:
                         stage = 2
+                elif stage == 2:
+                    if abs(posClick[0] - (width//2 + 450 + 48)) <= 48 and abs(posClick[1] - (height//2 - 37 + 27)) <= 27:
+                        if numberOfChoose < numberOfPlayer + 3:
+                            msg = "카드를 더 골라주세요"
+                        elif numberOfChoose > numberOfPlayer + 3:
+                            msg = "카드를 덜 빼주세요"
+                        elif not 2 in PlayerList and not 3 in PlayerList:
+                            msg = "웨어울프가 반드시 있어야 합니다"
+                        elif not (5 in PlayerList != 6 in PlayerList):
+                            msg = "메이슨은 항상 같이 넣거나 빼야 합니다"
+                        else:
+                            stage = 3
             if event.type == MOUSEMOTION:
                 posMotion = pygame.mouse.get_pos()
             if event.type == KEYDOWN:
@@ -215,5 +239,6 @@ def main():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+        clock.tick(FPS)
 
 main()
