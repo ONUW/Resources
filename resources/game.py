@@ -15,6 +15,7 @@ def main():
     posMotion = (0, 0)
     isClick = False
     tmp = 0
+    path = "resources"
 
     pygame.display.set_caption('One Night Ultimate Werewolf')
 
@@ -25,35 +26,40 @@ def main():
          "lightpurple": (206, 156, 206), "purple": (128, 0, 128), "violet": (143, 0, 255), "gray": (128, 128, 128)}
 
     # 폰트
-    myCardFont = pygame.font.Font("resources/fonts/NIXGONFONTS M 2.0.ttf", 20)
-    myCardFontbig = pygame.font.Font("resources/fonts/NIXGONFONTS M 2.0.ttf", 40)
+    try:
+        myCardFont = pygame.font.Font(path + "/fonts/NIXGONFONTS M 2.0.ttf", 20)
+    except:
+        path = "."
+        myCardFont = pygame.font.Font(path + "/fonts/NIXGONFONTS M 2.0.ttf", 20)
+
+    myCardFontbig = pygame.font.Font(path + "/fonts/NIXGONFONTS M 2.0.ttf", 40)
 
     # 사진
-    Doppelganger = pygame.image.load("resources/images/doppelganger.png")
-    Drunk = pygame.image.load("resources/images/drunk.png")
-    Hunter = pygame.image.load("resources/images/hunter.png")
-    Insomniac = pygame.image.load("resources/images/insomniac.png")
-    Mason = pygame.image.load("resources/images/mason.png")
-    Minion = pygame.image.load("resources/images/minion.png")
-    Robber = pygame.image.load("resources/images/robber.png")
-    Seer = pygame.image.load("resources/images/seer.png")
-    Tanner = pygame.image.load("resources/images/tanner.png")
-    Troublemaker = pygame.image.load("resources/images/troublemaker.png")
-    Villager = pygame.image.load("resources/images/villager.png")
-    Werewolf = pygame.image.load("resources/images/werewolf.png")
+    Doppelganger = pygame.image.load(path + "/images/doppelganger.png")
+    Drunk = pygame.image.load(path + "/images/drunk.png")
+    Hunter = pygame.image.load(path + "/images/hunter.png")
+    Insomniac = pygame.image.load(path + "/images/insomniac.png")
+    Mason = pygame.image.load(path + "/images/mason.png")
+    Minion = pygame.image.load(path + "/images/minion.png")
+    Robber = pygame.image.load(path + "/images/robber.png")
+    Seer = pygame.image.load(path + "/images/seer.png")
+    Tanner = pygame.image.load(path + "/images/tanner.png")
+    Troublemaker = pygame.image.load(path + "/images/troublemaker.png")
+    Villager = pygame.image.load(path + "/images/villager.png")
+    Werewolf = pygame.image.load(path + "/images/werewolf.png")
 
-    chooseDoppelganger = pygame.image.load("resources/images/choose/doppelganger80.png")
-    chooseDrunk = pygame.image.load("resources/images/choose/drunk80.png")
-    chooseHunter = pygame.image.load("resources/images/choose/hunter80.png")
-    chooseInsomniac = pygame.image.load("resources/images/choose/insomniac80.png")
-    chooseMason = pygame.image.load("resources/images/choose/mason80.png")
-    chooseMinion = pygame.image.load("resources/images/choose/minion80.png")
-    chooseRobber = pygame.image.load("resources/images/choose/robber80.png")
-    chooseSeer = pygame.image.load("resources/images/choose/seer80.png")
-    chooseTanner = pygame.image.load("resources/images/choose/tanner80.png")
-    chooseTroublemaker = pygame.image.load("resources/images/choose/troublemaker80.png")
-    chooseVillager = pygame.image.load("resources/images/choose/villager80.png")
-    chooseWerewolf = pygame.image.load("resources/images/choose/werewolf80.png")
+    chooseDoppelganger = pygame.image.load(path + "/images/choose/doppelganger80.png")
+    chooseDrunk = pygame.image.load(path + "/images/choose/drunk80.png")
+    chooseHunter = pygame.image.load(path + "/images/choose/hunter80.png")
+    chooseInsomniac = pygame.image.load(path + "/images/choose/insomniac80.png")
+    chooseMason = pygame.image.load(path + "/images/choose/mason80.png")
+    chooseMinion = pygame.image.load(path + "/images/choose/minion80.png")
+    chooseRobber = pygame.image.load(path + "/images/choose/robber80.png")
+    chooseSeer = pygame.image.load(path + "/images/choose/seer80.png")
+    chooseTanner = pygame.image.load(path + "/images/choose/tanner80.png")
+    chooseTroublemaker = pygame.image.load(path + "/images/choose/troublemaker80.png")
+    chooseVillager = pygame.image.load(path + "/images/choose/villager80.png")
+    chooseWerewolf = pygame.image.load(path + "/images/choose/werewolf80.png")
 
     # 음악
 
