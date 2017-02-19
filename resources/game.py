@@ -9,6 +9,7 @@ def main():
     sakiStage = 0
     stage = 1
     numberOfPlayer = 5
+    numberOfChoose = 0
     whoPlayNow = 0
     posClick = (0, 0)
     posMotion = (0, 0)
@@ -21,45 +22,45 @@ def main():
     Color = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0), "green": (0, 255, 0), "blue": (0, 0, 255),
          "magenta": (255, 0, 255), "orange": (255, 127, 0), "pink": (255, 192, 203),
          "backgroundColor": (255, 244, 78), "brown": (150, 75, 0), "cyan": (0, 255, 255), "indigo": (75, 0, 130),
-         "purple": (128, 0, 128), "violet": (143, 0, 255), "gray": (128, 128, 128)}
+         "lightpurple": (206, 156, 206), "purple": (128, 0, 128), "violet": (143, 0, 255), "gray": (128, 128, 128)}
 
     # 폰트
-    myCardFont = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 20)
-    myCardFontbig = pygame.font.Font("./fonts/NIXGONFONTS M 2.0.ttf", 40)
+    myCardFont = pygame.font.Font("resources/fonts/NIXGONFONTS M 2.0.ttf", 20)
+    myCardFontbig = pygame.font.Font("resources/fonts/NIXGONFONTS M 2.0.ttf", 40)
 
     # 사진
-    Doppelganger = pygame.image.load("./images/doppelganger.png")
-    Drunk = pygame.image.load("./images/drunk.png")
-    Hunter = pygame.image.load("./images/hunter.png")
-    Insomniac = pygame.image.load("./images/insomniac.png")
-    Mason = pygame.image.load("./images/mason.png")
-    Minion = pygame.image.load("./images/minion.png")
-    Robber = pygame.image.load("./images/robber.png")
-    Seer = pygame.image.load("./images/seer.png")
-    Tanner = pygame.image.load("./images/tanner.png")
-    Troublemaker = pygame.image.load("./images/troublemaker.png")
-    Villager = pygame.image.load("./images/villager.png")
-    Werewolf = pygame.image.load("./images/werewolf.png")
+    Doppelganger = pygame.image.load("resources/images/doppelganger.png")
+    Drunk = pygame.image.load("resources/images/drunk.png")
+    Hunter = pygame.image.load("resources/images/hunter.png")
+    Insomniac = pygame.image.load("resources/images/insomniac.png")
+    Mason = pygame.image.load("resources/images/mason.png")
+    Minion = pygame.image.load("resources/images/minion.png")
+    Robber = pygame.image.load("resources/images/robber.png")
+    Seer = pygame.image.load("resources/images/seer.png")
+    Tanner = pygame.image.load("resources/images/tanner.png")
+    Troublemaker = pygame.image.load("resources/images/troublemaker.png")
+    Villager = pygame.image.load("resources/images/villager.png")
+    Werewolf = pygame.image.load("resources/images/werewolf.png")
 
-    chooseDoppelganger = pygame.image.load("./images/choose/doppelganger80.png")
-    chooseDrunk = pygame.image.load("./images/choose/drunk80.png")
-    chooseHunter = pygame.image.load("./images/choose/hunter80.png")
-    chooseInsomniac = pygame.image.load("./images/choose/insomniac80.png")
-    chooseMason = pygame.image.load("./images/choose/mason80.png")
-    chooseMinion = pygame.image.load("./images/choose/minion80.png")
-    chooseRobber = pygame.image.load("./images/choose/robber80.png")
-    chooseSeer = pygame.image.load("./images/choose/seer80.png")
-    chooseTanner = pygame.image.load("./images/choose/tanner80.png")
-    chooseTroublemaker = pygame.image.load("./images/choose/troublemaker80.png")
-    chooseVillager = pygame.image.load("./images/choose/villager80.png")
-    chooseWerewolf = pygame.image.load("./images/choose/werewolf80.png")
+    chooseDoppelganger = pygame.image.load("resources/images/choose/doppelganger80.png")
+    chooseDrunk = pygame.image.load("resources/images/choose/drunk80.png")
+    chooseHunter = pygame.image.load("resources/images/choose/hunter80.png")
+    chooseInsomniac = pygame.image.load("resources/images/choose/insomniac80.png")
+    chooseMason = pygame.image.load("resources/images/choose/mason80.png")
+    chooseMinion = pygame.image.load("resources/images/choose/minion80.png")
+    chooseRobber = pygame.image.load("resources/images/choose/robber80.png")
+    chooseSeer = pygame.image.load("resources/images/choose/seer80.png")
+    chooseTanner = pygame.image.load("resources/images/choose/tanner80.png")
+    chooseTroublemaker = pygame.image.load("resources/images/choose/troublemaker80.png")
+    chooseVillager = pygame.image.load("resources/images/choose/villager80.png")
+    chooseWerewolf = pygame.image.load("resources/images/choose/werewolf80.png")
 
     # 음악
 
 
     # 캐릭터 배열
     Character = [Villager, Werewolf, Seer, Robber, Troublemaker, Tanner, Drunk, Hunter, Mason, Insomniac, Minion, Doppelganger]
-    chooseCharacter = [chooseVillager, chooseWerewolf, chooseSeer, chooseRobber, chooseTroublemaker, chooseTanner, chooseTanner, 
+    chooseCharacter = [chooseVillager, chooseWerewolf, chooseSeer, chooseRobber, chooseTroublemaker, chooseTanner, chooseTanner,
             chooseDrunk, chooseHunter, chooseMason, chooseInsomniac, chooseMinion, chooseDoppelganger]
     PlayerList = list()
     myCharacter = random.randrange(0, len(Character))
@@ -87,6 +88,15 @@ def main():
 
         # 잠에서 깨어나는 순서로 넣을게 (One Night 앱 참조)
         elif stage == 2:
+            if(numberOfChoose == numberOfPlayer + 3):
+                pygame.draw.rect(screen, Color["purple"], [width // 2 + 450, height // 2 - 37, 96, 54])
+            else:
+                pygame.draw.rect(screen, Color["lightpurple"], [width // 2 + 450, height // 2 - 37, 96, 54])
+            compTxt = myCardFontbig.render("완 료", True, Color["white"]) # 완료 버튼 만들기
+            txtObj2 = compTxt.get_rect()
+            txtObj2.center = (width // 2 + 498, height // 2 - 10)
+            screen.blit(compTxt, txtObj2)
+
             if sakiStage != stage:
                 sakiStage = stage
                 isClick = False 
@@ -137,13 +147,15 @@ def main():
                             isClick = False
                             if tmp in PlayerList:
                                 PlayerList.remove(tmp)
-                            else:
+                                numberOfChoose = numberOfChoose - 1
+                            elif numberOfChoose < numberOfPlayer + 3:
                                 PlayerList.append(tmp)
+                                numberOfChoose = numberOfChoose + 1
                     if tmp in PlayerList:
                         pygame.draw.rect(screen, Color["blue"], [x - 4, y - 4, 80 + 2*4, 120 + 2*4])
                     screen.blit(img, (x,y))
                     if abs(posMotion[0] - (x+40)) <= 40 and abs(posMotion[1] - (y+60)) <= 60:
-                        screen.blit(pygame.transform.scale(img2, (160, 240)), (width//2 + 200, height//2 - 120))
+                        screen.blit(pygame.transform.scale(img2, (160, 240)), (width//2 + 225, height//2 - 135))
 
         elif stage == 3:
             if sakiStage != stage:
